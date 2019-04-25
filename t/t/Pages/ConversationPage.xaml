@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:t.Pages"
+             x:Class="t.Pages.ConversationPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="incommingcell">
+                <ViewCell>
+                   <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                        <Frame CornerRadius="20" HeightRequest="40" WidthRequest="40" BackgroundColor="Red"/>
+                        <Label Text="{Binding text}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="outgoingcell">
+                <ViewCell>
+                   <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                        <Label Text="{Binding text}" />
+                        <Frame CornerRadius="20" HeightRequest="40" WidthRequest="40" BackgroundColor="Green"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+            <local:ConversationDataTemplateSelector x:Key="conversationDataTemplateSelector"
+                InCommingCell="{StaticResource incommingcell}"
+                OutGoingCell="{StaticResource outgoingcell}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    
+    <StackLayout Orientation="Vertical"  >
+        <ListView x:Name="listView" VerticalOptions="FillAndExpand" ItemTemplate="{StaticResource conversationDataTemplateSelector}" />
+        <StackLayout Orientation="Horizontal" HeightRequest="50" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" >
+            <Editor x:Name="message" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  />
+            <Button x:Name="send" Text="Send" WidthRequest="50" HeightRequest="50" BackgroundColor="Green" Clicked="Handle_Clicked"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

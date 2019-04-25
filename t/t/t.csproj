@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="JibPush\" />
+    <Folder Include="Pages\" />
+    <Folder Include="MyChatkit\" />
+    <Folder Include="MyChatkit\ModelChatkit\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionRoom\" />
+    <Folder Include="Controls\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionMessage\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionMessage\Request\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionMessage\Response\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionMessage\ResponseSubcription\" />
+    <Folder Include="Pages\Cells\" />
+  </ItemGroup>
+</Project>

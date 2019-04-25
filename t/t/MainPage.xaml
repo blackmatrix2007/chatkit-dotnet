@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:t" x:Class="t.MainPage">
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Entry Margin="20" x:Name="userid" Text="userid" HorizontalOptions="Center" VerticalOptions="Start" />
+        <Entry x:Name="message" Text="Message" HorizontalOptions="Center" VerticalOptions="Start" />
+        <Button Text="Connect" Clicked="Handle_Clicked" VerticalOptions="Start"/>
+        
+        <ListView>
+            
+        </ListView>
+    </StackLayout>
+</ContentPage>
