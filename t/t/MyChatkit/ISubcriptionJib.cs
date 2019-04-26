@@ -7,6 +7,8 @@ namespace t
     {
         event EventHandler<string> MessageReceived;
         event EventHandler<string> RoomsReceived;
+        event EventHandler<string> OnOffHandle;
+
 
         /// <summary>
         /// Request token from chatkit
@@ -18,5 +20,6 @@ namespace t
 
         void JoinRoom(Room room);
         void LeaveRoom();
+        void SubcribeUserStateOnOff(string partnerid);
     }
 }

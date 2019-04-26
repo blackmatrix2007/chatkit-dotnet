@@ -26,6 +26,7 @@ namespace t
 
 
             DependencyService.Get<ISubcriptionJib>().RoomsReceived += Handle_Fire;
+
         }
 
         async void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
@@ -52,6 +53,5 @@ namespace t
             }
 
         }
-
     }
 }

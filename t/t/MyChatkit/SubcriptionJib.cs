@@ -13,14 +13,14 @@ namespace t
 {
     public partial class SubcriptionJib : ISubcriptionJib , IDisposable
     {
-        string instance = "xxx";
+        string instance = "v1:us1:d6100906-573e-4b40-b8ca-c5995b573c1b";
         public static string DOMAIN = string.Empty;
         public static string instance_id = string.Empty;
         string region = string.Empty;
         string sdkversion = "1.2.0";
         string heatbeat_interval = "60";
         string sdk_platform = Device.RuntimePlatform;
-        public static string user_id = "sondh";
+        public static string user_id = "sondh"; //neo_at_hotelsng // sondh
         string token = string.Empty;
 
         //message_limit(integer|optional) : Specifies the number of messages that should be retrieved from 
@@ -36,7 +36,11 @@ namespace t
 
             DOMAIN = string.Format("{0}.pusherplatform.io", region);
             subcribe_rooms_url = string.Format("https://{0}/services/chatkit/v2/{1}/users", DOMAIN, instance_id);
-            //subcribe_userstateonoff_url = string.Format("https://us1.pusherplatform.io/services/chatkit_presence/v2/{0}/users/{1}", instance_id);
+
+            //just know online/offline user have subcribe. so challenge 
+            subcribe_userstateonoff_url = string.Format("https://{0}/services/chatkit_presence/v2/{1}/users/{2}", DOMAIN, instance_id,"partnerid");
+
+            InitThreadPoolForListenManyUser();
         }
 
         public async Task<TokenResponse> RequestToken()
@@ -58,6 +62,8 @@ namespace t
             {
                 token = tokenResponse.access_token;
                 SubcribeRooms();
+
+                FetchUserFromApi();
             }
         }
 
@@ -66,6 +72,11 @@ namespace t
             if (backgroundRoomsThread != null)
             {
                 backgroundRoomsThread.Abort();
+            }
+
+            if (_threads != null && _threads.Count > 0 )
+            {
+                DisconnectHandleUserStateOnOff();
             }
         }
 

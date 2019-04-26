@@ -25,5 +25,7 @@
     <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionMessage\Response\" />
     <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionMessage\ResponseSubcription\" />
     <Folder Include="Pages\Cells\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionStateOnlineOffline\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionStateOnlineOffline\ResponseSubcription\" />
   </ItemGroup>
 </Project>

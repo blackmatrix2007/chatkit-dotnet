@@ -78,14 +78,15 @@ namespace t
             }
             if (backgroundRoomsThread == null)
             {
-                backgroundRoomsThread = new Thread(() =>
-                {
-
-                    ActionSubcribeRooms();
-                })
+                backgroundRoomsThread = new Thread(ActionSubcribeRoomsThreadStart)
                 { IsBackground = true };
                 backgroundRoomsThread.Start();
             }
+        }
+
+        void ActionSubcribeRoomsThreadStart()
+        {
+            ActionSubcribeRooms();
         }
     }
 }

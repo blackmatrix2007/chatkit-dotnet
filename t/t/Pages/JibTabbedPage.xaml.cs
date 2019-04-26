@@ -10,6 +10,8 @@ namespace t.Pages
         public JibTabbedPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasBackButton(this, false);
         }
     }
 }

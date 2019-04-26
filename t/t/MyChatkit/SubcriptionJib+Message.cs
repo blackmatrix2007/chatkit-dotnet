@@ -105,15 +105,19 @@ namespace t
             {
                 return;
             }
+
             if (backgroundThread == null || !backgroundThread.IsAlive)
             {
-                backgroundThread = new Thread(() =>
-                {
-                    ActionJoinRoomMemberShip(roomid);
-                })
-                { IsBackground = true };
-                backgroundThread.Start();
+                backgroundThread = new Thread(ActionJoinRoomMemberShipThreadStart) { IsBackground = true };
+                backgroundThread.Start(roomid);
             }
         }
+
+        void ActionJoinRoomMemberShipThreadStart(object obj)
+        {
+            string roomid = obj as string;
+            ActionJoinRoomMemberShip(roomid);
+        }
+
     }
 }

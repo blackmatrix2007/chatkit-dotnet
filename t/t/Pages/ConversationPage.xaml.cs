@@ -37,6 +37,7 @@ namespace t.Pages
         {
             InitializeComponent();
 
+
             this.room = item;
             items = new ObservableCollection<MessageData>();
 

@@ -4,6 +4,16 @@
              x:Class="t.PresenceSubcriptionPage"
              Icon="icontab.png"
              Title="presence">
-    <ContentPage.Content>
-    </ContentPage.Content>
+    <ListView  x:Name="listView" RowHeight="60" HasUnevenRows="true">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
+                            <Label Text = "{Binding user_id}" FontSize="24" HorizontalOptions="StartAndExpand"/>
+                            <Label Text = "{Binding state}" FontSize="24" HeightRequest="30" WidthRequest="30" HorizontalOptions="End"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
