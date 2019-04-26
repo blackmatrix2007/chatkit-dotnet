@@ -45,6 +45,8 @@ namespace t
                 string url = subcribe_userstateonoff_url.Replace("partnerid", partnerid);
                 // Create a new HttpWebRequest object.Make sure that 
                 // a default proxy is set if you are behind a firewall.
+
+
                 HttpWebRequest myHttpWebRequest1 =
                   (HttpWebRequest)WebRequest.Create(url);
                 myHttpWebRequest1.Method = "SUBSCRIBE";

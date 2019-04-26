@@ -144,6 +144,14 @@
     <ImageAsset Include="Assets.xcassets\icontab.imageset\Group 1660.png" />
     <ImageAsset Include="Assets.xcassets\icontab.imageset\Group 1660%402x.png" />
     <ImageAsset Include="Assets.xcassets\icontab.imageset\Group 1660%403x.png" />
+    <ImageAsset Include="Assets.xcassets\online.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\offline.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\online.imageset\online.png" />
+    <ImageAsset Include="Assets.xcassets\online.imageset\online%402x.png" />
+    <ImageAsset Include="Assets.xcassets\online.imageset\online%403x.png" />
+    <ImageAsset Include="Assets.xcassets\offline.imageset\offline.png" />
+    <ImageAsset Include="Assets.xcassets\offline.imageset\offline%402x.png" />
+    <ImageAsset Include="Assets.xcassets\offline.imageset\offline%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -163,5 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\icontab.imageset\" />
+    <Folder Include="Assets.xcassets\online.imageset\" />
+    <Folder Include="Assets.xcassets\offline.imageset\" />
   </ItemGroup>
 </Project>
