@@ -51,21 +51,18 @@ namespace t
                 user_id = user_id
             };
             TokenResponse jib = await DependencyService.Get<IJibApi>().PostToken(tokenRequest);
+            if (jib != null)
+            {
+                token = jib.access_token;
+                Console.WriteLine("token Bearer {0}", token);
+                SubcribeRooms();
+                SubcribeKeepUserOnline();
 
+            }
             return jib;
         }
 
-        public async void Connect()
-        {
-            TokenResponse tokenResponse = await RequestToken();
-            if (tokenResponse != null)
-            {
-                token = tokenResponse.access_token;
-                SubcribeRooms();
 
-                FetchUserFromApi();
-            }
-        }
 
         public void Dispose()
         {
@@ -88,6 +85,11 @@ namespace t
         public string GetChatkitId()
         {
             return user_id;
+        }
+
+        public void SetToken(string token)
+        {
+            this.token = token;
         }
     }
 }

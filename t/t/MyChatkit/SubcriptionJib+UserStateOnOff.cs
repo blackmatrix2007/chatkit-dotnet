@@ -31,12 +31,6 @@ namespace t
             _threads = new List<Thread>();
         }
 
-        private void FetchUserFromApi() {
-            SubcribeUserStateOnOff("neo2_at_gmailcom");
-            SubcribeUserStateOnOff("one_at_hotelsng");
-            SubcribeUserStateOnOff("neo_at_hotelsng");
-            SubcribeUserStateOnOff("sondh");
-        }
 
         private void ActionUserStateOnOff(string partnerid)
         {
@@ -75,7 +69,8 @@ namespace t
                         string line = reader.ReadLine();
                         // process the line
                         OnOffHandle?.Invoke(partnerid, line);
-                        //break;
+                        //Console.WriteLine("PresenceSubcriptionPage {0}", line);
+
                     }
                 }
             }
@@ -108,14 +103,15 @@ namespace t
             }
         }
 
-        public void KillThread(int index)
+        public void KillThread(string partnerid)
         {
-            string id = string.Format("MyThread{0}", index);
+
             int count = _threads.Count;
             int i = 0;
             for (; i < count; i++)
             {
-                if (_threads[i].Name == id) {
+                if (_threads[i].Name == partnerid)
+                {
                     _threads[i].Abort();
                     break;
                 }
@@ -137,6 +133,11 @@ namespace t
                 return;
             }
 
+            if (partnerid == user_id)
+            {
+                return;
+            }
+
             if (_threads.Count >  MAX_THREADS)
             {
                 Console.WriteLine("current number threads {0} maximum", _threads.Count);
@@ -145,10 +146,22 @@ namespace t
 
             Thread thread = new Thread(ActionUserStateOnOffThreadStart);
             thread.IsBackground = true;
-            thread.Name = string.Format("MyThread{0}", partnerid);
+            thread.Name = partnerid;
+
+
 
             _threads.Add(thread);
-            thread.Start(partnerid);
+
+            int count = _threads.Count;
+            int i = 0;
+            for (; i < count; i++)
+            {
+                if (_threads[i].Name == partnerid)
+                {
+                    break;
+                }
+            }
+            _threads[i].Start(partnerid);
         }
 
         void ActionUserStateOnOffThreadStart(object obj)

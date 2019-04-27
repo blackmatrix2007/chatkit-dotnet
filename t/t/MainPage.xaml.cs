@@ -38,7 +38,7 @@ namespace t
 
          void Handle_Clicked(object sender, System.EventArgs e)
         {
-            DependencyService.Get<ISubcriptionJib>().Connect();
+            //DependencyService.Get<ISubcriptionJib>().Connect();
         }
     }
 }

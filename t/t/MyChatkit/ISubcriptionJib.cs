@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using t.MyChatkit.ModelChatkit.ModelRelatedSubcriptionRoom;
 
 namespace t
@@ -13,13 +14,15 @@ namespace t
         /// <summary>
         /// Request token from chatkit
         /// </summary>
-        void Connect();
+
+        Task<TokenResponse> RequestToken();
 
         string GetChatkitId();
         string GetToken();
 
         void JoinRoom(Room room);
         void LeaveRoom();
+
         void SubcribeUserStateOnOff(string partnerid);
     }
 }

@@ -3,20 +3,15 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:t;assembly=t" 
             x:Class="t.Pages.JibTabbedPage">
+    
+    <NavigationPage Title="private" Icon="icontab">
+        <x:Arguments>
+            <local:MembershipSubcriptionPage />
+        </x:Arguments>
+    </NavigationPage>
      <NavigationPage Title="room" Icon="icontab">
         <x:Arguments>
             <local:RoomsSubcriptionPage />
-        </x:Arguments>
-    </NavigationPage>
-    <NavigationPage Title="cursor" Icon="icontab">
-        <x:Arguments>
-            <local:CursorSubcriptionPage />
-        </x:Arguments>
-    </NavigationPage>
-    
-     <NavigationPage Title="presence" Icon="icontab">
-        <x:Arguments>
-            <local:PresenceSubcriptionPage />
         </x:Arguments>
     </NavigationPage>
 </TabbedPage>

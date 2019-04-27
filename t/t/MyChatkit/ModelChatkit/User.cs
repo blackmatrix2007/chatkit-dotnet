@@ -9,12 +9,15 @@ namespace t.MyChatkit.ModelChatkit
         public string id { get; set; }
 
         [JsonProperty("name")]
-        public string access_token { get; set; }
+        public string name { get; set; }
 
         [JsonProperty("created_at")]
         public string created_at { get; set; }
 
         [JsonProperty("updated_at")]
         public string updated_at { get; set; }
+
+        [JsonIgnore]
+        public string state { get; set; }
     }
 }

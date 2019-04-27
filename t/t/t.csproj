@@ -27,5 +27,12 @@
     <Folder Include="Pages\Cells\" />
     <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionStateOnlineOffline\" />
     <Folder Include="MyChatkit\ModelChatkit\ModelRelatedSubcriptionStateOnlineOffline\ResponseSubcription\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedUsers\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedUsers\Request\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedUsers\Response\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedRooms\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedRooms\Request\" />
+    <Folder Include="MyChatkit\ModelChatkit\ModelRelatedRooms\Response\" />
   </ItemGroup>
 </Project>

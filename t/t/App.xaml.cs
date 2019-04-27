@@ -19,7 +19,7 @@ namespace t
         {
             InitializeComponent();
 
-            DependencyService.Get<ISubcriptionJib>().Connect();
+
 
             MainPage = new NavigationPage(new JibTabbedPage());
         }

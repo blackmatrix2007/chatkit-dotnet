@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using t;
+using t.MyChatkit.ModelChatkit;
 using t.MyChatkit.ModelChatkit.ModelRelatedSubcriptionMessage.Request;
+using t.MyChatkit.ModelChatkit.ModelRelatedUsers.Request;
 
 [assembly: Xamarin.Forms.Dependency(typeof(JibApi))]
 namespace t
@@ -27,7 +29,7 @@ namespace t
 
         public Task<TokenResponse> PostToken(TokenRequest request)
         {
-            return PostExecute<TokenRequest, TokenResponse>(POSTTOKEN, HttpMethod.Post, request);
+            return PostExecute<TokenRequest, TokenResponse>(POSTTOKEN, request);
         }
 
         private string BuildQueryString(Dictionary<string, object> queryParameters)
@@ -70,7 +72,7 @@ namespace t
             }
         }
 
-        protected async Task<TResponse> PostExecute<TRequest, TResponse>(string uri, HttpMethod method, TRequest data, CancellationToken ct = default(CancellationToken)) where TRequest : BaseRequest where TResponse : BaseResponse
+        protected async Task<TResponse> PostExecute<TRequest, TResponse>(string uri, TRequest data, CancellationToken ct = default(CancellationToken)) where TRequest : BaseRequest where TResponse : BaseResponse
         {
             using (HttpClient client = new HttpClient())
             {
@@ -92,10 +94,65 @@ namespace t
             }
         }
 
+        protected async Task<TResponse> GetExecute<TRequest, TResponse>(string uri, TRequest data, CancellationToken ct = default(CancellationToken)) where TRequest : BaseRequest where TResponse : BaseResponse
+        {
+            using (HttpClient client = new HttpClient())
+            {
+
+                var content = new StringContent(JsonConvert.SerializeObject(data.FormData), Encoding.UTF8, "application/json");
+
+                BuildAddtionalHeadersString(client.DefaultRequestHeaders, data.Headers);
+
+
+                HttpResponseMessage resposne = await client.GetAsync(new Uri(string.Format("https://{0}{1}", SubcriptionJib.DOMAIN, uri)));
+
+                var jsonResponse = await resposne.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "yyyyMMdd" };
+
+                var result = JsonConvert.DeserializeObject<TResponse>(jsonResponse, dateTimeConverter);
+
+                return result;
+            }
+        }
+
+
+
+
         public Task<CreateMessageResponse> SendMessage(CreateMessageRequest request)
         {
             string SENDMESSAGE = string.Format("/services/chatkit/v2/{0}/rooms/{1}/messages", SubcriptionJib.instance_id, request.roomId);
-            return PostExecute<CreateMessageRequest, CreateMessageResponse>(SENDMESSAGE, HttpMethod.Post, request);
+            return PostExecute<CreateMessageRequest, CreateMessageResponse>(SENDMESSAGE, request);
+        }
+
+        public async Task<User[]> GetUsers(GetUsersRequest request)
+        {
+            //  https://us1.pusherplatform.io/services/chatkit/v3/d6100906-573e-4b40-b8ca-c5995b573c1b/users
+            string GETUSERS = string.Format("/services/chatkit/v2/{0}/users", SubcriptionJib.instance_id);
+
+            using (HttpClient client = new HttpClient())
+            {
+
+                var content = new StringContent(JsonConvert.SerializeObject(request.Headers), Encoding.UTF8, "application/json");
+
+                BuildAddtionalHeadersString(client.DefaultRequestHeaders, request.Headers);
+
+
+                HttpResponseMessage resposne = await client.GetAsync(new Uri(string.Format("https://{0}{1}", SubcriptionJib.DOMAIN, GETUSERS)));
+
+                var jsonResponse = await resposne.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "yyyyMMdd" };
+
+                var result = JsonConvert.DeserializeObject<User[]>(jsonResponse, dateTimeConverter);
+
+                return result;
+            }
+        }
+
+        public Task<User[]> CreateRoom(GetUsersRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

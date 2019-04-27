@@ -4,7 +4,7 @@
              x:Class="t.PresenceSubcriptionPage"
              Icon="icontab.png"
              Title="presence">
-    <ListView  x:Name="listView" RowHeight="60" HasUnevenRows="true">
+    <ListView  x:Name="listView" RowHeight="60" HasUnevenRows="true" ItemsSource="{Binding Items}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
