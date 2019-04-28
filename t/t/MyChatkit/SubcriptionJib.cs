@@ -20,13 +20,13 @@ namespace t
         string sdkversion = "1.2.0";
         string heatbeat_interval = "60";
         string sdk_platform = Device.RuntimePlatform;
-        public static string user_id = "sondh"; //neo_at_hotelsng // sondh
+        public static string user_id = Device.RuntimePlatform == Device.Android ? "neo_at_hotelsng": "sondh"; //neo_at_hotelsng // sondh
         string token = string.Empty;
 
         //message_limit(integer|optional) : Specifies the number of messages that should be retrieved from 
         //the persistent store and populated after the subscription is established.By default it is 20. 
         //The maximum value is 100.
-        int message_limit = 1;
+        int message_limit = 20;
 
         public SubcriptionJib()
         {

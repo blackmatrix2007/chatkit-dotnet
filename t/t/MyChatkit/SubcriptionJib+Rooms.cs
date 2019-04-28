@@ -6,6 +6,27 @@ using Newtonsoft.Json.Linq;
 
 namespace t
 {
+    //switch eventName {
+    //case .initial_state:
+    //    parseInitialStatePayload(eventName, data: apiEventData, userStore: self.userStore)
+    //case .added_to_room:
+    //    parseAddedToRoomPayload(eventName, data: apiEventData)
+    //case .removed_from_room:
+    //    parseRemovedFromRoomPayload(eventName, data: apiEventData)
+    //case .room_updated:
+    //    parseRoomUpdatedPayload(eventName, data: apiEventData)
+    //case .room_deleted:
+    //    parseRoomDeletedPayload(eventName, data: apiEventData)
+    //}
+
+    public enum RoomEvent {
+        initial_state,
+        added_to_room,
+        removed_from_room,
+        room_updated,
+        room_deleted,
+    }
+
     public partial class SubcriptionJib 
     {
         Thread backgroundRoomsThread;

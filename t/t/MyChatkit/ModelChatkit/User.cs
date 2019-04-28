@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using Newtonsoft.Json;
 
 namespace t.MyChatkit.ModelChatkit
 {
     public class User
     {
+
         [JsonProperty("id")]
         public string id { get; set; }
 

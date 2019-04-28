@@ -12,6 +12,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using t;
 using t.MyChatkit.ModelChatkit;
+using t.MyChatkit.ModelChatkit.ModelRelatedRooms.Request;
+using t.MyChatkit.ModelChatkit.ModelRelatedRooms.Response;
 using t.MyChatkit.ModelChatkit.ModelRelatedSubcriptionMessage.Request;
 using t.MyChatkit.ModelChatkit.ModelRelatedUsers.Request;
 
@@ -116,7 +118,27 @@ namespace t
             }
         }
 
+        protected async Task<TResponse> DeleteExecute<TRequest, TResponse>(string uri, TRequest data, CancellationToken ct = default(CancellationToken)) where TRequest : BaseRequest where TResponse : BaseResponse
+        {
+            using (HttpClient client = new HttpClient())
+            {
 
+                var content = new StringContent(JsonConvert.SerializeObject(data.FormData), Encoding.UTF8, "application/json");
+
+                BuildAddtionalHeadersString(client.DefaultRequestHeaders, data.Headers);
+
+
+                HttpResponseMessage resposne = await client.DeleteAsync(new Uri(string.Format("https://{0}{1}", SubcriptionJib.DOMAIN, uri)));
+
+                var jsonResponse = await resposne.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "yyyyMMdd" };
+
+                var result = JsonConvert.DeserializeObject<TResponse>(jsonResponse, dateTimeConverter);
+
+                return result;
+            }
+        }
 
 
         public Task<CreateMessageResponse> SendMessage(CreateMessageRequest request)
@@ -127,7 +149,7 @@ namespace t
 
         public async Task<User[]> GetUsers(GetUsersRequest request)
         {
-            //  https://us1.pusherplatform.io/services/chatkit/v3/d6100906-573e-4b40-b8ca-c5995b573c1b/users
+            //https://us1.pusherplatform.io/services/chatkit/v3/d6100906-573e-4b40-b8ca-c5995b573c1b/users
             string GETUSERS = string.Format("/services/chatkit/v2/{0}/users", SubcriptionJib.instance_id);
 
             using (HttpClient client = new HttpClient())
@@ -136,7 +158,6 @@ namespace t
                 var content = new StringContent(JsonConvert.SerializeObject(request.Headers), Encoding.UTF8, "application/json");
 
                 BuildAddtionalHeadersString(client.DefaultRequestHeaders, request.Headers);
-
 
                 HttpResponseMessage resposne = await client.GetAsync(new Uri(string.Format("https://{0}{1}", SubcriptionJib.DOMAIN, GETUSERS)));
 
@@ -150,9 +171,29 @@ namespace t
             }
         }
 
-        public Task<User[]> CreateRoom(GetUsersRequest request)
+
+        public Task<CreateRoomResponse> CreateRoom(CreateRoomRequest request)
+        {
+            //$ curl - X POST \
+            //https://us1.pusherplatform.io/services/chatkit/v3/:instance_id/rooms \
+            //-d '{"name": "my-cool-room", "user_ids": ["ham", "will"]}'
+            string CREATEROOM = string.Format("/services/chatkit/v2/{0}/rooms", SubcriptionJib.instance_id);
+            return PostExecute<CreateRoomRequest, CreateRoomResponse>(CREATEROOM, request);
+        }
+
+        public Task<CreateRoomResponse> UpdateRoom(CreateRoomRequest request)
         {
             throw new NotImplementedException();
+        }
+
+        public Task<BaseResponse> DeleteRoom(DeleteRoomRequest request)
+        {
+            string Delete = string.Format("/services/chatkit/v2/{0}/rooms/{1}", SubcriptionJib.instance_id, request.room_id);
+            return DeleteExecute<DeleteRoomRequest, BaseResponse>(Delete, request);
+            //$ curl -X DELETE \
+            //https://us1.pusherplatform.io/services/chatkit/v3/:instance_id/rooms/:room_id
+            //string Delete = string.Format("/services/chatkit/v2/{0}/users", SubcriptionJib.instance_id);
+            //DeleteExecute
         }
     }
 }

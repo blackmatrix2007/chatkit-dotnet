@@ -7,8 +7,7 @@ using Xamarin.Forms;
 
 namespace t.ViewModels
 {
-    public class RoomsSubcriptionViewModel
-    : BaseViewModel
+    public class RoomsSubcriptionViewModel : BaseViewModel
     {
         private ObservableCollection<Room> items;
         public ObservableCollection<Room> Items
@@ -28,18 +27,30 @@ namespace t.ViewModels
             Console.WriteLine("RoomsSubcriptionPage {0}", e);
 
             object[] array = JsonConvert.DeserializeObject<object[]>(e);
-            if (array.Length == 4)
+
+            if (array != null && array.Length == 4)
             {
-
                 string a = array[3].ToString();
-                BaseContent<RoomData> room = JsonConvert.DeserializeObject<BaseContent<RoomData>>(a);
-                Items.Clear();
+                BaseData baseData = JsonConvert.DeserializeObject<BaseData>(a);
 
-
-                Items = new ObservableCollection<Room>(room.data.rooms);
-
+                if (baseData.event_name == RoomEvent.initial_state.ToString())
+                {
+                    BaseContent<RoomData> baseContent = JsonConvert.DeserializeObject<BaseContent<RoomData>>(a);
+                    Items = new ObservableCollection<Room>(baseContent.data.rooms);
+                }
+                else if (baseData.event_name == RoomEvent.added_to_room.ToString())
+                {
+                    BaseContent<RoomDetail> baseContent = JsonConvert.DeserializeObject<BaseContent<RoomDetail>>(a);
+                    Room addingRoom = baseContent.data.room;
+                    Items.Add(addingRoom);
+                }
+                else if (baseData.event_name == RoomEvent.room_updated.ToString())
+                { }
+                else if (baseData.event_name == RoomEvent.room_deleted.ToString())
+                { }
+                else if (baseData.event_name == RoomEvent.removed_from_room.ToString())
+                { }
             }
-
         }
     }
 }

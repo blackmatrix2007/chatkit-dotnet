@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace t.MyChatkit.ModelChatkit.ModelRelatedRooms.Response
 {
-    public class CreateRoomResponse<T> : BaseResponse
+    public class CreateRoomResponse : BaseResponse
     {
         //     A JSON object containing the following keys:
 

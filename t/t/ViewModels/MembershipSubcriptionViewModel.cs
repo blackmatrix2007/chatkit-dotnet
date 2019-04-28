@@ -2,8 +2,10 @@
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using t.MyChatkit.ModelChatkit;
+using t.MyChatkit.ModelChatkit.ModelRelatedRooms.Request;
 using t.MyChatkit.ModelChatkit.ModelRelatedSubcriptionStateOnlineOffline;
 using t.MyChatkit.ModelChatkit.ModelRelatedUsers.Request;
+using t.Pages;
 using Xamarin.Forms;
 
 namespace t.ViewModels
@@ -21,9 +23,32 @@ namespace t.ViewModels
         public MembershipSubcriptionViewModel()
         {
             Items = new ObservableCollection<User>();
-
-
             Connect();
+        }
+
+        private Command<User> itemSelectedCommand;
+        public Command<User> ItemSelectedCommand
+        {
+            get
+            {
+                return itemSelectedCommand ?? new Command<User>(CreateNewOrCheckExistDialog);
+            }
+        }
+
+
+        private async void CreateNewOrCheckExistDialog(User partner) {
+            CreateRoomRequest request = new CreateRoomRequest()
+            {
+                isPrivate = true,
+                user_ids = new string[2] { SubcriptionJib.user_id, partner.id },
+                name = partner.name,
+            };
+            request.Headers["Authorization"] = DependencyService.Get<ISubcriptionJib>().GetToken();
+            var result = await DependencyService.Get<IJibApi>().CreateRoom(request);
+            if (result!=null)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new IndivisualConversationPage());
+            }
         }
 
         void Handle_OnOffHandle(object sender, string e)
@@ -48,15 +73,20 @@ namespace t.ViewModels
                 {
                     int count = Items.Count;
                     int i = 0;
-                    //bool isOnline = false;
                     for (; i < count; i++)
                     {
                         if (Items[i].id == partnerid && Items[i].state != newstate)
                         {
                             User u = Items[i];
-                            u.state = newstate;
+                           
+                            Console.WriteLine("PresenceSubcriptionPage Change{0} {1}", partnerid, newstate);
 
-                            Items[i] = u;
+                            Items[i] = new User() { 
+                                id = partnerid,
+                                name = u.name,
+                                state = newstate,
+                                
+                            };
 
                             break;
                         }
@@ -104,7 +134,7 @@ namespace t.ViewModels
             {
                 return refreshCommand ?? new Command(() =>
                 {
-                    //LoadData();
+
                 });
             }
         }

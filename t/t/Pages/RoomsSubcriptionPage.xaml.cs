@@ -20,15 +20,11 @@ namespace t
             InitializeComponent();
 
             BindingContext = new RoomsSubcriptionViewModel();
-
-
         }
 
         async void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
             await Navigation.PushAsync(new ConversationPage((Room)e.Item));
         }
-
-
     }
 }

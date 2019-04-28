@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="t.MembershipSubcriptionPage" Icon="icontab.png" Title="membership">
-    <ContentPage.Content>
-        <ListView x:Name="listView" IsPullToRefreshEnabled="true" ItemsSource="{Binding Items}" RefreshCommand="{Binding RefreshCommand}">
-            <ListView.ItemTemplate>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:controls="clr-namespace:t.Controls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="t.MembershipSubcriptionPage" Icon="icontab.png" Title="membership">
+        <controls:JJListView x:Name="listView"
+                             HasUnevenRows="true"
+                             IsPullToRefreshEnabled="true" 
+                             ItemSelectedCommand="{Binding ItemSelectedCommand}" 
+                             ItemsSource="{Binding Items}" >
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+            <controls:JJListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-                            <Label Text="{Binding id}" FontSize="24" />
+                            <Label Text="{Binding id}" HeightRequest="30" />
                             <Label Text="{Binding name}" />
-                            <Image Source="{Binding state}" HeightRequest="30" WidthRequest="30" HorizontalOptions="End"/>
+                            <Image Source="{Binding state}" HeightRequest="20" WidthRequest="20" HorizontalOptions="End"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </ContentPage.Content>
+            </controls:JJListView.ItemTemplate>
+        </controls:JJListView>
 </ContentPage>

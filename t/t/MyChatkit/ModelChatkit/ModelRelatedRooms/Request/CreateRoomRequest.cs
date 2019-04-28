@@ -13,21 +13,62 @@ namespace t.MyChatkit.ModelChatkit.ModelRelatedRooms.Request
         //    user_ids(array|optional): If you wish to add users to the room at the point of creation, you may provide their user IDs.
 
         //Note that leaving the request body empty means that a room will be created with an automatically assigned name and no users.
+        public string name
+        {
+            set
+            {
+                if (FormData.ContainsKey("name"))
+                {
+                    FormData["name"] = value;
+                }
+                else
+                {
+                    FormData.Add("name", value);
+                }
+            }
+        }
+        public bool isPrivate
+        {
+            set
+            {
+                if (FormData.ContainsKey("private"))
+                {
+                    FormData["private"] = value;
+                }
+                else
+                {
+                    FormData.Add("private", value);
+                }
+            }
+        }
+        public CustomRoomData custom_data
+        {
+            set
+            {
+                if (FormData.ContainsKey("custom_data"))
+                {
+                    FormData["custom_data"] = value;
+                }
+                else
+                {
+                    FormData.Add("custom_data", value);
+                }
+            }
+        }
 
-        [JsonProperty("name")]
-        public string name { get; set; }
-
-        [JsonProperty("private")]
-        public string isPrivate { get; set; }
-
-        [JsonProperty("member_user_ids")]
-        public string[] member_user_ids { get; set; }
-
-        [JsonProperty("custom_data")]
-        public CustomRoomData custom_data { get; set; }
-
-        [JsonProperty("user_ids")]
-        public string[] user_ids { get; set; }
-
+        public string[] user_ids
+        {
+            set
+            {
+                if (FormData.ContainsKey("user_ids"))
+                {
+                    FormData["user_ids"] = value;
+                }
+                else
+                {
+                    FormData.Add("user_ids", value);
+                }
+            }
+        }
     }
 }

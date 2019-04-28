@@ -9,7 +9,7 @@ namespace t
             {
                 if (FormData.ContainsKey("grant_type"))
                 {
-                    FormData["FormData"] = value;
+                    FormData["grant_type"] = value;
                 }
                 else
                 {
@@ -24,7 +24,7 @@ namespace t
             {
                 if (FormData.ContainsKey("user_id"))
                 {
-                    FormData["FormData"] = value;
+                    FormData["user_id"] = value;
                 }
                 else
                 {
