@@ -14,7 +14,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="JibPush\" />
     <Folder Include="Pages\" />
     <Folder Include="MyChatkit\" />
     <Folder Include="MyChatkit\ModelChatkit\" />
