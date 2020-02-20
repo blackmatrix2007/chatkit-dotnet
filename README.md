@@ -5,10 +5,11 @@ SDK. Net for Pusher Chatkit https://pusher.com/chatkit (Xamarin Form/ Native)
 |:---:|:---:|
 
 ## About
-This project is maintained by Son Duong.<br>
+This project is maintained by Son Duong.(sondhoang@gmail.com)<br>
 I specialize in developing mobile applications using Xamarin and native technology stack.<br>
 
 **Looking for developers for your project?**<br>
+
 
 <a href="mailto:sondhoang@gmail.com"> 
 <img src="./art/hire.png" height="36"></a> <br>
@@ -19,4 +20,3 @@ I make some features
 - Fetch Users 
 - Handle room subcribe 
 - Handle conversation 
-
